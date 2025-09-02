@@ -109,8 +109,8 @@ class VertexRAGTool(BaseTool):
 
             file_name= set(links) # Convert to a set to remove duplicates
             # --- Configuration ---
-            GCS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME') # Your bucket name
-            LOCAL_DOWNLOAD_DIRECTORY = r"D:\\Crewai Projects\\cemex\\bucket_files" # Your desired local download folder
+            GCS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME') 
+            LOCAL_DOWNLOAD_DIRECTORY = r"D:\\Crewai Projects\\cemex\\bucket_files" 
 
             # --- Loop through each file and download it ---
             # print(f"Starting download of {len(file_name)} files from '{GCS_BUCKET_NAME}' to '{LOCAL_DOWNLOAD_DIRECTORY}'")
@@ -128,10 +128,10 @@ class VertexRAGTool(BaseTool):
     
 
 # if __name__ == "__main__":
-#     # Example usage
 #     tool = VertexRAGTool()
 #     query = "how to fix the wall cracks in a building?"
 #     result = tool._run(query=query)
 #     print(result)
+
 
 
