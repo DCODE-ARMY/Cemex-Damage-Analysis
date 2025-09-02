@@ -1,0 +1,88 @@
+structural_identification_task:
+  description: >
+    Perform a visual structural identification for the image at {image_path}.
+    Your primary goal is to produce a structured report based on the visual analysis.
+    Formulate a detailed query to be used with the Vision Analysis Tool.
+   
+
+    Your formulated query MUST combine the user's original question {query} for context with the specific technical requirements below.
+    Dont ask for a solution or repair guide, just focus on identifying the structural elements.    
+    It should ask the vision model to analyze the image and return information on the following points:
+    1.  **Building Element:** The specific structural component (e.g., column, beam, slab).
+    2.  **Primary Material:** The main construction material (e.g., concrete, steel, brick).
+    3.  **Orientation:** The element's spatial orientation (e.g., vertical, horizontal, sloped).
+    If anything is unclear from the image, state 'Identification unclear'.
+        
+
+  expected_output: >
+    A structured report. You MUST populate the content of each section based on your visual analysis. DO NOT use the examples literally.
+    ### Structural Identification Report
+
+    1.  **Building Element**: [State the identified building element here]
+    2.  **Material**: [Specify the primary material identified here]
+    3.  **Orientation**: [Describe the element's orientation here]
+    
+
+damage_diagnosis_task:
+  description: >
+    Perform a detailed visual damage diagnosis for the image at {image_path} .
+    Your goal is to generate a comprehensive damage report based on the findings.
+    Formulate a detailed, multi-point query to be used with the Vision Analysis Tool
+
+    Your formulated query MUST combine the user's original question for context with the specific diagnostic requirements below.
+      It should ask the vision model to analyze the image and return a detailed assessment covering:
+      1.  **Damage Types:** All visible forms of material failure (e.g., cracking, spalling, corrosion).
+      2.  **Visual Characteristics:** A detailed description of the damage's appearance, size, and location.
+      3.  **Likely Root Causes:** An inference of the probable causes based on visual evidence.
+      4.  **Severity Assessment:** A rating of Low, Moderate, or High, with a brief justification.
+    If anything is unclear from the image, state 'Diagnosis unclear'.
+    Dont ask for a solution or repair guide, just focus on diagnosing the damage.
+  expected_output: >
+    A structured damage diagnosis report. 
+    ### Damage Diagnosis Report
+
+    1.  **Type of Damage Identified**: [List the specific types of damage detected]
+    2.  **Visual Characteristics**: [Provide a detailed description of the damage's appearance and location]
+    3.  **Likely Root Causes**: [Explain the inferred causes of the identified damage]
+    4.  **Severity Assessment**: [State the severity (Low, Moderate, High) and justify your assessment]
+  
+
+solution_retrieval_task:
+  description: >
+    Analyze a structural issue from a `damage_report` or user `query` ({query}) to deliver a detailed, actionable repair guide.
+    Diagnose the core problem accurately, recommend suitable CEMEX products and repair methods, provide a clear step-by-step repair protocol, 
+    validate recommendations with official CEMEX documentation, and include links to relevant product data sheets or technical manuals.
+    make sure the links are from valid sources and you can access them. 
+    Use tools (`VertexRagTool`, `SerperTool`) to gather information from internal knowledge bases and public technical sources, 
+    ensuring a professional, technically accurate, and practical response.
+
+  expected_output: >
+    A concise repair solution guide based on tool-retrieved information, structured with sections for problem summary, 
+    recommended CEMEX products, step-by-step repair protocol, and reference links to official CEMEX documentation.
+
+solution_retrieval_task_query:
+  description: >
+    Analyze a structural issue from a `damage_report` or user `query` ({query}) to deliver a detailed, actionable repair guide.
+    Diagnose the core problem accurately,recommend suitable CEMEX products and repair methods, provide a clear step-by-step repair protocol, 
+    validate recommendations with official CEMEX documentation, and include links to relevant product data sheets or technical manuals.
+    make sure the links are from valid sources and you can access them. 
+    Use tools (`VertexRagTool`, `SerperTool`) to gather information from internal knowledge bases and public technical sources, 
+    ensuring a professional, technically accurate, and practical response.
+
+  expected_output: >
+    A concise repair solution guide based on tool-retrieved information, structured with sections for problem summary, 
+    recommended CEMEX products, step-by-step repair protocol, and reference links to official CEMEX documentation.
+
+
+
+generate_repair_guide:
+  description: >
+    Synthesize provided information into a comprehensive, user-friendly repair guide using the `damage_report`, `repair_solution_notes`,
+    and user `query`. Consolidate and verify details to create a clear, actionable guide, recommending appropriate CEMEX products. 
+    Identify and fill any information gaps using targeted tool searches, such as product data sheets for safety or mixing details, 
+    without inventing information. Structure the guide logically with clear, accurate content grounded in the gathered data.
+
+  expected_output: >
+    A comprehensive, user-friendly repair guide based on the provided damage report, repair solution notes, and additional research, 
+    structured with sections for project overview, safety precautions, materials and equipment, repair procedure, curing and finishing,
+    and a disclaimer, without using markdown in the output.
