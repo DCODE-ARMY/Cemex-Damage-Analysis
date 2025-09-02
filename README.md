@@ -62,10 +62,7 @@ The application orchestrates a workflow using a "crew" of AI agents, each with a
 ### Installation
 
 1. Clone the repository:
-    ```sh
-    git clone <your-repository-url>
-    cd <your-repository-directory>
-    ```
+    
 2. Install the required Python packages:
     ```sh
     pip install -r requirements.txt
